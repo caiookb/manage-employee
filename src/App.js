@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Card, TextInput, Icon, Button } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button title={"Add new employee"} color={"green"} icon={"plus"} />
+      <br></br>
+
+      <Button size={"sm"} title={"Delete"} color={"red"} />
+      <br></br>
+
+      <Button size={"sm"} title={"Register"} color={"green"} />
+      <br></br>
+
+      <Button size={"sm"} title={"Cancel"} color={"green"} />
+      <br></br>
+
+      <Icon size={"sm"} icon={"email"} />
+      <br></br>
+
+      <TextInput icon={"search"} placeholder={"Search by name or team... "} />
+      <br></br>
+      <Card />
     </div>
   );
 }
