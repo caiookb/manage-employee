@@ -20,6 +20,16 @@ export const saveEmployeeByPage = (list) => ({
   payload: list,
 });
 
+export const savePreviouslyAddedEmployee = (employee) => ({
+  type: EmployeesTypes.SAVE_PREVIOUSLY_ADDED_EMPLOYEE,
+  payload: employee,
+});
+
+export const clearPreviouslyAddedEmployee = (employee) => ({
+  type: EmployeesTypes.CLEAR_PREVIOUSLY_ADDED_EMPLOYEE,
+  payload: {},
+});
+
 export const cleanEmployees = () => ({
   type: EmployeesTypes.CLEAN_EMPLOYEES,
   payload: [],

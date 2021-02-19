@@ -1,3 +1,3 @@
-import * as EmployeesAction from "./EmployeesActions";
+import * as EmployeesActions from "./EmployeesActions";
 
-export { EmployeesAction };
+export { EmployeesActions };

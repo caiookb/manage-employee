@@ -4,6 +4,7 @@ const initialState = {
   employeesList: [],
   currentPage: [],
   selectedEmployee: {},
+  previouslyAddedEmployee: {},
 };
 
 export default (state = initialState, action) => {
@@ -15,6 +16,10 @@ export default (state = initialState, action) => {
       return { ...state, EmployeesList: payload };
     case EmployeesTypes.SAVE_EMPLOYEE_DETAIL:
       return { ...state, selectedEmployee: payload };
+    case EmployeesTypes.SAVE_PREVIOUSLY_ADDED_EMPLOYEE:
+      return { ...state, previouslyAddedEmployee: payload };
+    case EmployeesTypes.CLEAR_PREVIOUSLY_ADDED_EMPLOYEE:
+      return { ...state, previouslyAddedEmployee: {} };
     case EmployeesTypes.CLEAR_EMPLOYEE_DETAIL:
       return { ...state, selectedEmployee: {} };
     case EmployeesTypes.CLEAN_EMPLOYEES:
