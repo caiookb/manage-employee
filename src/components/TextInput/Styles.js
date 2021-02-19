@@ -2,6 +2,12 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { Colors } from "../../utils/Colors";
 
+export const StyledTextInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const StyledInputDiv = styled.div`
   border: none;
   display: flex;
@@ -10,6 +16,7 @@ export const StyledInputDiv = styled.div`
   padding: 0px 15px;
   background-color: ${Colors.gray};
   border-radius: 5px;
+  margin: 10px;
 `;
 
 export const StyledInput = styled.input`
@@ -18,6 +25,13 @@ export const StyledInput = styled.input`
   width: ${(props) => (props.icon ? "96%" : "100%")};
   border-radius: 5px;
   background-color: ${Colors.gray};
+  color: ${Colors.grayText};
+  font-size: 22px;
+`;
+
+export const StyledPlaceholder = styled.label`
+  display: flex;
+  margin: 10px;
   color: ${Colors.grayText};
   font-size: 22px;
 `;
