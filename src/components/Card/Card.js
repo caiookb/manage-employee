@@ -18,6 +18,10 @@ const user = {
 };
 
 const Card = (props) => {
+  // const {
+  //   employee: { name, email, team, start_date },
+  // } = props;
+
   return (
     <StyledCard>
       <StyledTag team={user.team}>

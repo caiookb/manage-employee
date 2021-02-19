@@ -12,9 +12,9 @@ export const StyledCard = styled.div`
   width: 450px;
   height: 100px;
   border-radius: 5px;
-  -webkit-box-shadow: 4px 4px 5px 1px rgba(171, 171, 171, 1);
-  -moz-box-shadow: 4px 4px 5px 1px rgba(171, 171, 171, 1);
-  box-shadow: 4px 4px 5px 1px rgba(171, 171, 171, 1);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   align-items: center;
