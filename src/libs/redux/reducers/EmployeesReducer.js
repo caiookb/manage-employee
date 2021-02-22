@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case EmployeesTypes.SAVE_EMPLOYEES_BY_PAGE:
       return { ...state, currentPage: payload };
     case EmployeesTypes.SAVE_EMPLOYEES_LIST:
-      return { ...state, EmployeesList: payload };
+      return { ...state, employeesList: payload };
     case EmployeesTypes.SAVE_EMPLOYEE_DETAIL:
       return { ...state, selectedEmployee: payload };
     case EmployeesTypes.SAVE_PREVIOUSLY_ADDED_EMPLOYEE:
