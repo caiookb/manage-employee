@@ -10,10 +10,11 @@ export const StyledText = styled.p`
       props.bold &&
       css`
         font-weight: bold;
-      `}
-    ${(props) =>
-      props.styling &&
-      css`
-        font-style: ${props.styling};
       `};
+
+  ${(props) =>
+    props.styling &&
+    css`
+      font-style: ${props.styling};
+    `};
 `;

@@ -22,7 +22,7 @@ const Card = (props) => {
   return (
     <StyledCard>
       <StyledTag team={item.team}>
-        <Icon size={"md"} icon={item.team.toLowerCase()} />
+        <Icon size={"lg"} icon={item.team.toLowerCase()} />
       </StyledTag>
 
       <StyledInfo>

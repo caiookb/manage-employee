@@ -29,7 +29,6 @@ const TextInput = (props) => {
     <StyledTextInput>
       {label ? <StyledPlaceholder>{label}</StyledPlaceholder> : null}
       <StyledInputDiv>
-        {icon ? <Icon icon={icon} size={"sm"} /> : null}
         <StyledInput
           onChange={(e) => onChange(e.target.value)}
           size={size}
@@ -41,6 +40,7 @@ const TextInput = (props) => {
           ref={register}
           defaultValue={defaultValue}
         />
+        {icon ? <Icon icon={icon} size={"sm"} /> : null}
       </StyledInputDiv>
       {errors ? (
         <StyledError>

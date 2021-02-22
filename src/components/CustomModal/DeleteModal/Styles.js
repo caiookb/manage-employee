@@ -4,6 +4,7 @@ export const StyledModal = styled.div`
   display: flex;
   flex-direction: column;
   font-weight: 300;
+  text-align: center;
 `;
 
 export const StyledOption = styled.div`
