@@ -6,6 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./Store";
 import { Provider } from "react-redux";
 
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
