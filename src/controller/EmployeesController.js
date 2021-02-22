@@ -16,18 +16,40 @@ export const saveTokenOnRedux = (token) => (dispatch) => {
     });
 };
 
+export const filterByName = (name) => (dispatch) => {
+  const list = JSON.parse(localStorage.getItem("list"));
+
+  const filterAction = list.filter((item) => {
+    if (
+      name.toLowerCase() === "mobile" ||
+      name.toLowerCase() === "frontend" ||
+      name.toLowerCase() === "backend"
+    ) {
+      return item.team.toLowerCase().includes(name);
+    } else {
+      return item.name.includes(name);
+    }
+  });
+
+  if (name == "") {
+    dispatch(EmployeesActions.saveEmployeesList(list));
+  } else {
+    dispatch(EmployeesActions.saveEmployeesList(filterAction));
+  }
+};
+
 export const createNewEmployee = (body) => (dispatch) => {
   const token = Store.getState().user?.token;
   return EmployeeServer.createEmployee(body, token)
     .then((res) => dispatch(EmployeesActions.savePreviouslyAddedEmployee(res)))
     .then(() =>
       EmployeeServer.fetchEmployees(token).then((res) => {
+        localStorage.setItem("list", JSON.stringify(res));
         dispatch(EmployeesActions.saveEmployeesList(res));
         return res;
       })
     )
     .catch((err) => {
-      console.log(err);
       throw err;
     });
 };
@@ -36,7 +58,7 @@ export const getEmployeesList = () => (dispatch) => {
   const token = Store.getState().user?.token;
   return EmployeeServer.fetchEmployees(token)
     .then((res) => {
-      console.log("response", res);
+      localStorage.setItem("list", JSON.stringify(res));
       dispatch(EmployeesActions.saveEmployeesList(res));
     })
     .catch((err) => {
@@ -54,9 +76,10 @@ export const updateEmployeeById = (id, body) => (dispatch) => {
           dispatch(EmployeesActions.savePreviouslyAddedEmployee(res))
         )
         .then(() =>
-          EmployeeServer.fetchEmployees(token).then((res) =>
-            dispatch(EmployeesActions.saveEmployeesList(res))
-          )
+          EmployeeServer.fetchEmployees(token).then((res) => {
+            localStorage.setItem("list", JSON.stringify(res));
+            dispatch(EmployeesActions.saveEmployeesList(res));
+          })
         )
     )
     .catch((err) => {
@@ -68,6 +91,7 @@ export const deleteEmployeeById = (id) => (dispatch) => {
   const token = Store.getState().user?.token;
   return EmployeeServer.deleteEmployeesById(id, token).then(() =>
     EmployeeServer.fetchEmployees(token).then((res) => {
+      localStorage.setItem("list", JSON.stringify(res));
       dispatch(EmployeesActions.saveEmployeesList(res));
     })
   );

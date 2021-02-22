@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import Main from "./views/Main/Main";
 import { connect } from "react-redux";
 import * as EmployeesController from "./controller/EmployeesController";
-
-import "./App.css";
 import { Spinner, Welcome, Text } from "./components";
+import "./App.css";
 
 const App = ({ token, saveTokenOnRedux }) => {
   const [checkingToken, setCheckingToken] = useState(true);
@@ -17,6 +16,7 @@ const App = ({ token, saveTokenOnRedux }) => {
         }, 3000);
       })
       .catch((err) => {
+        localStorage.removeItem("list");
         setCheckingToken(false);
       });
   }, [token]);

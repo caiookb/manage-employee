@@ -18,7 +18,10 @@ const Card = (props) => {
 
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const splitName = item.name?.split(" ");
 
+  const name = splitName[0];
+  const lastName = splitName.length > 1 ? splitName[1] : "";
   return (
     <StyledCard data-testid="card">
       <StyledTag team={item.team}>
@@ -26,7 +29,7 @@ const Card = (props) => {
       </StyledTag>
 
       <StyledInfo>
-        <Text fontSize={20} text={item.name} />
+        <Text fontSize={20} capitalize text={`${name} ${lastName}`} />
         <Text
           fontSize={16}
           text={`${item.team} | Employee since ${moment(item.start_date).format(

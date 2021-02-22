@@ -6,6 +6,7 @@ import {
   Grid,
   Icon,
   PreviouslyAdded,
+  Text,
   TextInput,
 } from "../../components";
 import { StyledMain, StyledContainer, StyledCards } from "./Styles";
@@ -14,7 +15,7 @@ import AddOrEditEmployee from "../../components/CustomModal/AddOrEditEmployeeMod
 
 const Main = (props) => {
   const { employeesList, token } = props;
-  const { getEmployees } = props;
+  const { getEmployees, filterByName } = props;
 
   const [addEmployeeModal, setAddEmployeeModal] = useState(false);
   const [error, setError] = useState(false);
@@ -32,28 +33,43 @@ const Main = (props) => {
   return (
     <StyledContainer>
       <StyledMain>
-        <Icon icon={"employee"} size={"lg"} fontSize={36} title={"Employee"} />
-        <br></br>
-        <Grid rows={1} columns={2} customColumns={[1.75, 1]}>
-          <TextInput
-            icon={"search"}
-            placeholder={"Search by name or team... "}
+        <>
+          <Icon
+            icon={"employee"}
+            size={"lg"}
+            fontSize={36}
+            title={"Employees"}
           />
-          <Button
-            title={"Add new employee"}
-            color={"green"}
-            icon={"plus"}
-            onClick={() => setAddEmployeeModal(true)}
-          />
-        </Grid>
-        <PreviouslyAdded />
-        <StyledCards>
-          <Grid rows={employeesList.length} columns={2}>
-            {employeesList.map((item) => (
-              <Card item={item} />
-            ))}
+          <br></br>
+          <Grid rows={1} columns={2} customColumns={[1.75, 1]}>
+            <TextInput
+              icon={"search"}
+              placeholder={"Search by name or team... "}
+              onChange={filterByName}
+            />
+            <Button
+              title={"Add new employee"}
+              color={"green"}
+              icon={"plus"}
+              onClick={() => setAddEmployeeModal(true)}
+            />
           </Grid>
-        </StyledCards>
+          <PreviouslyAdded />
+          <StyledCards>
+            {employeesList.length > 0 ? (
+              <Grid rows={employeesList.length} columns={2}>
+                {employeesList.map((item) => (
+                  <Card item={item} />
+                ))}
+              </Grid>
+            ) : (
+              <Text
+                fontSize={26}
+                text={"We did not found any employee... \t"}
+              />
+            )}
+          </StyledCards>
+        </>
       </StyledMain>
 
       <AddOrEditEmployee
@@ -74,6 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    filterByName: (name) => dispatch(EmployeesController.filterByName(name)),
     getEmployees: () => dispatch(EmployeesController.getEmployeesList()),
   };
 };

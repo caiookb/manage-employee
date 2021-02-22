@@ -44,7 +44,7 @@ const TextInput = (props) => {
       </StyledInputDiv>
       {errors ? (
         <StyledError>
-          {errors?.[name] && (
+          {errors[name] && (
             <span>
               <i>{label.replace("*", " ")} is required</i>
             </span>

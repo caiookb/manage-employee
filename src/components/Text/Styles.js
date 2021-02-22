@@ -17,4 +17,10 @@ export const StyledText = styled.p`
     css`
       font-style: ${props.styling};
     `};
+
+  ${(props) =>
+    props.capitalize &&
+    css`
+      text-transform: capitalize;
+    `}
 `;

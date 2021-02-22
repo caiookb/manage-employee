@@ -81,14 +81,19 @@ const AddOrEditEmployee = (props) => {
               type={"email"}
               label={"Email *"}
               defaultValue={editing ? item?.email : undefined}
-              register={register({ required: true })}
+              register={register({
+                required: true,
+              })}
               errors={errors}
             />
             <TextInput
               name={"cpf"}
               label={"CPF *"}
+              type={"number"}
               defaultValue={editing ? item?.cpf : undefined}
-              register={register({ required: true })}
+              register={register({
+                required: true,
+              })}
               errors={errors}
             />
           </Grid>
