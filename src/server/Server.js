@@ -1,5 +1,6 @@
-const urlPrefix =
-  "https://crudcrud.com/api/dd9999fd26a44847a915a142e462c63c/emp/";
+import axios from "axios";
+
+const urlPrefix = "https://crudcrud.com/api/";
 
 const url = (path) => {
   return urlPrefix.concat(path.join("/"));
@@ -11,11 +12,14 @@ export default (config) => {
   const opt = {
     method,
     data: body,
+
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, HEAD, OPTIONS",
   };
 
-  return fetch(url(path), opt)
+  return axios(url(path), opt)
     .then((res) => {
-      return res.json();
+      return res.data;
     })
     .catch((err) => {
       throw err;
