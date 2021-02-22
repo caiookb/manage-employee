@@ -2,7 +2,6 @@ import { EmployeesTypes } from "../types";
 
 const initialState = {
   employeesList: [],
-  currentPage: [],
   selectedEmployee: {},
   previouslyAddedEmployee: {},
 };
