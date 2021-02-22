@@ -8,6 +8,8 @@ const CustomModal = ({ active, setActive, children }) => {
       isOpen={active}
       onRequestClose={() => setActive(false)}
       className={styles.modal}
+      testId="modal"
+      data-testid="modal"
     >
       {React.Children.toArray(children).map((component) => component)}
     </Modal>

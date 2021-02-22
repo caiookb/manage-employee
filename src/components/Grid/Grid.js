@@ -19,9 +19,12 @@ const Grid = (props) => {
     return e;
   });
 
-  return gridRows.map((row) => {
+  return gridRows.map((row, index) => {
     return (
-      <StyledGrid columns={customColumns ? convertedFlotToFraction : row.size}>
+      <StyledGrid
+        key={index}
+        columns={customColumns ? convertedFlotToFraction : row.size}
+      >
         {row.items}
       </StyledGrid>
     );

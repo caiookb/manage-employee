@@ -23,7 +23,7 @@ const PreviouslyAdded = (props) => {
   const name = previouslyAddedEmployee?.name?.split(" ")[0];
 
   return displayConfirm ? (
-    <StyledPrevious>
+    <StyledPrevious data-testid="previous">
       <Grid rows={1} columns={3} customColumns={[1.25, 1, 1]}>
         <Icon
           icon={"employee"}

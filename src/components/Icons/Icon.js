@@ -5,7 +5,12 @@ import { Text } from "../";
 
 const Icon = ({ size, icon, onClick, title, fontSize, bold, styling }) => (
   <StyledIconSection onClick={onClick}>
-    <StyledIcon size={size} icon={Icons[icon]} title={title} />
+    <StyledIcon
+      data-testid="icon"
+      size={size}
+      icon={Icons[icon]}
+      title={title}
+    />
     {title ? (
       <Text fontSize={fontSize} text={title} bold={bold} styling={styling} />
     ) : null}

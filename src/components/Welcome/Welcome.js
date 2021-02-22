@@ -30,7 +30,7 @@ const Welcome = (props) => {
   };
 
   return (
-    <StyledError>
+    <StyledError data-testid="welcome">
       <StyledMessage>
         <Text fontSize={38} bold text={"Welcome to Employees Frontend"} />
         <Text

@@ -21,7 +21,7 @@ const Dropdown = (props) => {
   const options = React.Children.toArray(children);
 
   return (
-    <StyledTextInput>
+    <StyledTextInput data-testid="dropdown">
       {label ? <StyledPlaceholder>{label}</StyledPlaceholder> : null}
       <StyledSelect
         defaultValue={defaultValue}

@@ -26,7 +26,7 @@ const TextInput = (props) => {
   } = props;
 
   return (
-    <StyledTextInput>
+    <StyledTextInput data-testid="textinput">
       {label ? <StyledPlaceholder>{label}</StyledPlaceholder> : null}
       <StyledInputDiv>
         <StyledInput

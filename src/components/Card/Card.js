@@ -20,9 +20,9 @@ const Card = (props) => {
   const [deleteModal, setDeleteModal] = useState(false);
 
   return (
-    <StyledCard>
+    <StyledCard data-testid="card">
       <StyledTag team={item.team}>
-        <Icon size={"lg"} icon={item.team.toLowerCase()} />
+        <Icon size={"lg"} icon={item?.team?.toLowerCase()} />
       </StyledTag>
 
       <StyledInfo>
