@@ -3,21 +3,21 @@ import fetchServer from "./Server";
 export const fetchEmployees = (token) => {
   return fetchServer({
     method: "GET",
-    path: [token, "emp"],
+    path: [token, "nutemployee"],
   });
 };
 
 export const fetchEmployeesById = (id, token) => {
   return fetchServer({
     method: "GET",
-    path: [token, "emp", id],
+    path: [token, "nutemployee", id],
   });
 };
 
 export const updateEmployeesById = (id, body, token) => {
   return fetchServer({
     method: "PUT",
-    path: [token, "emp", id],
+    path: [token, "nutemployee", id],
     body,
   });
 };
@@ -25,14 +25,14 @@ export const updateEmployeesById = (id, body, token) => {
 export const deleteEmployeesById = (id, token) => {
   return fetchServer({
     method: "DELETE",
-    path: [token, "emp", id],
+    path: [token, "nutemployee", id],
   });
 };
 
 export const createEmployee = (body, token) => {
   return fetchServer({
     method: "POST",
-    path: [token, "emp"],
+    path: [token, "nutemployee"],
     body,
   });
 };
