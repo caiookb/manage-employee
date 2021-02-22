@@ -25,9 +25,9 @@ export const filterByName = (name) => (dispatch) => {
       name.toLowerCase() === "frontend" ||
       name.toLowerCase() === "backend"
     ) {
-      return item.team.toLowerCase().includes(name);
+      return item.team.toLowerCase().includes(name.toLowerCase());
     } else {
-      return item.name.includes(name);
+      return item.name.toLowerCase().includes(name.toLowerCase());
     }
   });
 
