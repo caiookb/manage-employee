@@ -13,10 +13,11 @@ import { StyledOption } from "../../Dropdown/Styles";
 import { StyledAction, StyledForm } from "./Styles";
 import * as EmployeesController from "../../../controller/EmployeesController";
 import { connect } from "react-redux";
+import Icon from "../../Icons/Icon";
 
 const AddOrEditEmployee = (props) => {
   const { active, setActive, editing, item, setDeleteModal } = props;
-  const { addEmployee, editEmployee } = props;
+  const { addEmployee, editEmployee, clearLastAdded } = props;
   const { register, handleSubmit, errors } = useForm();
 
   const [fetching, setFetching] = useState(false);
@@ -29,6 +30,9 @@ const AddOrEditEmployee = (props) => {
     setFetching(true);
     handleRequest(data)
       .then(() => {
+        if (editing) {
+          clearLastAdded();
+        }
         setActive(false);
         setFetching(false);
       })
@@ -44,6 +48,24 @@ const AddOrEditEmployee = (props) => {
         <Spinner />
       ) : (
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <Icon
+            icon={editing ? "edit" : "employee"}
+            size={"md"}
+            title={
+              editing
+                ? `Edit ${item?.name?.split(" ")[0]}'s profile`
+                : "Add a new employee"
+            }
+            fontSize={24}
+            bold
+          />
+          <Icon
+            title={"fields with * are required"}
+            fontSize={18}
+            styling={"italic"}
+            size={"md"}
+          />
+          <br></br>
           <Grid rows={1} columns={1}>
             <TextInput
               name={"name"}
@@ -173,6 +195,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(EmployeesController.updateEmployeeById(id, data)),
     deteleEmployee: (id) =>
       dispatch(EmployeesController.deleteEmployeeById(id)),
+    clearLastAdded: () => dispatch(EmployeesController.clearLastAdded()),
   };
 };
 

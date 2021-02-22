@@ -3,11 +3,14 @@ import { Colors } from "../../utils/Colors";
 
 const spin = keyframes`
   0% {
-    width: 100%
-  }
-  100% {
     width: 0%;
     opacity: 0;
+
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+
   }
 `;
 
@@ -30,5 +33,5 @@ export const StyledLine = styled.div`
   width: 100%;
   margin-top: 20px;
   border-bottom: 3px solid ${Colors.green};
-  animation: ${spin} 10s linear forwards;
+  animation: ${spin} 3 linear forwards;
 `;

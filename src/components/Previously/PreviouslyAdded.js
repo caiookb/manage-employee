@@ -12,17 +12,15 @@ const PreviouslyAdded = (props) => {
 
   const [displayConfirm, setDisplayConfirm] = useState(false);
 
-  const name = previouslyAddedEmployee?.name?.split(" ")[0];
-
   useEffect(() => {
-    if (deleteModal || editModal) {
+    if (previouslyAddedEmployee.name) {
       setDisplayConfirm(true);
-    } else if (!deleteModal && !editModal) {
-      setDisplayConfirm(false);
     } else {
       setDisplayConfirm(false);
     }
-  }, [deleteModal, editModal]);
+  }, [previouslyAddedEmployee, editModal, deleteModal]);
+
+  const name = previouslyAddedEmployee?.name?.split(" ")[0];
 
   return displayConfirm ? (
     <StyledPrevious>

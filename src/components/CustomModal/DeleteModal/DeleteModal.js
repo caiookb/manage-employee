@@ -5,8 +5,8 @@ import { StyledModal, StyledOption } from "./Styles";
 import * as EmployeesController from "../../../controller/EmployeesController";
 
 const DeleteModal = (props) => {
-  const { item, active, setActive, setDisplayConfirm } = props;
-  const { deleteEmployee } = props;
+  const { item, active, setActive } = props;
+  const { deleteEmployee, clearLastAdded } = props;
 
   return (
     <CustomModal active={active} setActive={setActive}>
@@ -14,6 +14,7 @@ const DeleteModal = (props) => {
         <Text
           fontSize={22}
           text={`Are you sure you want to delete ${item.name}?`}
+          bold
         />
         <StyledOption>
           <Button
@@ -21,7 +22,7 @@ const DeleteModal = (props) => {
             onClick={() => {
               deleteEmployee(item._id).then(() => {
                 setActive(false);
-                setDisplayConfirm(false);
+                clearLastAdded();
               });
             }}
             color={"red"}
@@ -31,7 +32,7 @@ const DeleteModal = (props) => {
             title={"Cancel"}
             onClick={() => {
               setActive(false);
-              setDisplayConfirm(false);
+              clearLastAdded();
             }}
             color={"gray"}
             size={"sm"}
@@ -46,6 +47,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteEmployee: (id) =>
       dispatch(EmployeesController.deleteEmployeeById(id)),
+    clearLastAdded: () => dispatch(EmployeesController.clearLastAdded()),
   };
 };
 
