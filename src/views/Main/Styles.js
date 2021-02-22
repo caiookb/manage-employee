@@ -13,4 +13,12 @@ export const StyledMain = styled.div`
   width: 1000px;
   height: 80%;
   padding: 10px;
+
+  @media (max-width: 500px) {
+    width: fit-content;
+  }
+`;
+
+export const StyledCards = styled.div`
+  margin-top: 50px;
 `;
