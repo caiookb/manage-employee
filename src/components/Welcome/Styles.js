@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { Colors } from "../../utils/Colors";
+import styled from "styled-components";
 
 export const StyledError = styled.div`
   width: 100vw;
@@ -11,4 +10,12 @@ export const StyledMessage = styled.div`
   place-items: center;
   width: 100vw;
   height: 50%;
+`;
+
+export const StyledIFrame = styled.iframe`
+  margin: 10px;
+  height: 400px;
+  border-radius: 5px;
+  overflow: hidden;
+  overflow-y: hidden;
 `;

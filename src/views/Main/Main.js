@@ -7,7 +7,6 @@ import {
   Icon,
   PreviouslyAdded,
   TextInput,
-  Welcome,
 } from "../../components";
 import { StyledMain, StyledContainer, StyledCards } from "./Styles";
 import * as EmployeesController from "../../controller/EmployeesController";
@@ -30,9 +29,7 @@ const Main = (props) => {
       });
   }, [error, token]);
 
-  console.log("OTKEN", token);
-
-  return !token || token != null ? (
+  return (
     <StyledContainer>
       <StyledMain>
         <Icon icon={"employee"} size={"lg"} fontSize={36} title={"Employee"} />
@@ -58,13 +55,12 @@ const Main = (props) => {
           </Grid>
         </StyledCards>
       </StyledMain>
+
       <AddOrEditEmployee
         active={addEmployeeModal}
         setActive={setAddEmployeeModal}
       />
     </StyledContainer>
-  ) : (
-    <Welcome />
   );
 };
 

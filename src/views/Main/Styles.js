@@ -1,5 +1,3 @@
-import { getByDisplayValue } from "@testing-library/react";
-import { isArray } from "lodash";
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`

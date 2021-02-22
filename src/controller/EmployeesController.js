@@ -2,22 +2,22 @@ import { EmployeesActions, UserActions } from "../libs/redux/actions";
 import { EmployeeServer } from "../server";
 import Store from "../Store";
 
-const token = JSON.stringify(localStorage.getItem("token"));
-
-export const saveTokenOnRedux = () => (dispatch) => {
-  return EmployeeServer.fetchEmployees(token)
-    .then((res) => {
-      dispatch(UserActions.saveUserToken(token));
-      return res;
+export const saveTokenOnRedux = (token) => (dispatch) => {
+  const tokenOnStorage = JSON.parse(localStorage.getItem("token"));
+  console.log("token on storage", tokenOnStorage);
+  return EmployeeServer.fetchEmployees(tokenOnStorage)
+    .then(() => {
+      dispatch(UserActions.saveUserToken(tokenOnStorage));
+      return { message: "Thanks, token is valid!", status: 200 };
     })
     .catch((err) => {
-      throw err;
+      localStorage.setItem("token", JSON.stringify(token));
+      throw { message: err, status: 401 };
     });
 };
 
 export const createNewEmployee = (body) => (dispatch) => {
-  console.log(Store.getState());
-
+  const token = Store.getState().user?.token;
   return EmployeeServer.createEmployee(body, token)
     .then((res) => dispatch(EmployeesActions.savePreviouslyAddedEmployee(res)))
     .then(() =>
@@ -33,6 +33,7 @@ export const createNewEmployee = (body) => (dispatch) => {
 };
 
 export const getEmployeesList = () => (dispatch) => {
+  const token = Store.getState().user?.token;
   return EmployeeServer.fetchEmployees(token)
     .then((res) => {
       console.log("response", res);
@@ -44,8 +45,9 @@ export const getEmployeesList = () => (dispatch) => {
     });
 };
 
-export const updateEmployeeById = (id, body) => (dispatch) =>
-  EmployeeServer.updateEmployeesById(id, body, token)
+export const updateEmployeeById = (id, body) => (dispatch) => {
+  const token = Store.getState().user?.token;
+  return EmployeeServer.updateEmployeesById(id, body, token)
     .then((res) =>
       EmployeeServer.fetchEmployeesById(id, token)
         .then((res) =>
@@ -60,18 +62,23 @@ export const updateEmployeeById = (id, body) => (dispatch) =>
     .catch((err) => {
       throw err;
     });
+};
 
-export const deleteEmployeeById = (id, token) => (dispatch) =>
-  EmployeeServer.deleteEmployeesById(id, token).then(() =>
+export const deleteEmployeeById = (id) => (dispatch) => {
+  const token = Store.getState().user?.token;
+  return EmployeeServer.deleteEmployeesById(id, token).then(() =>
     EmployeeServer.fetchEmployees(token).then((res) => {
       dispatch(EmployeesActions.saveEmployeesList(res));
     })
   );
+};
 
-export const getEmployeeById = (id, token) => (dispatch) =>
-  EmployeeServer.fetchEmployeesById(id, token).then((res) =>
+export const getEmployeeById = (id) => (dispatch) => {
+  const token = Store.getState().user?.token;
+  return EmployeeServer.fetchEmployeesById(id, token).then((res) =>
     dispatch(EmployeesActions.saveEmployeeDetail(res))
   );
+};
 
 export const clearLastAdded = () => (dispatch) =>
   dispatch(EmployeesActions.clearPreviouslyAddedEmployee());
