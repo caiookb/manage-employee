@@ -20,7 +20,6 @@ export const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   transition: 0.2s ease-in;
-  font-family: Roboto;
   font-weight: 300;
 
   &:hover {

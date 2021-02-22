@@ -1,9 +1,7 @@
-import { getByDisplayValue } from "@testing-library/react";
 import { isArray } from "lodash";
 import styled from "styled-components";
 
 const hasCustomDisplay = (display) => {
-  console.log(isArray(display));
   return isArray(display);
 };
 
@@ -18,4 +16,8 @@ export const StyledGrid = styled.div`
   display: grid;
   place-items: center;
   grid-template-columns: ${(props) => getColumns(props.columns)};
+
+  @media (max-width: 500px) {
+    grid-template-columns: unset;
+  }
 `;

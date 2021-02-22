@@ -6,6 +6,7 @@ const getIconBackground = (icon) =>
     Frontend: Colors.frontend,
     Backend: Colors.backend,
     Mobile: Colors.mobile,
+    "No team": Colors.gray,
   }[icon]);
 
 export const StyledCard = styled.div`
@@ -18,7 +19,8 @@ export const StyledCard = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  margin: 10px 25px;
 `;
 
 export const StyledTag = styled.div`
@@ -35,11 +37,10 @@ export const StyledTag = styled.div`
 export const StyledInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
   flex-grow: 1;
   margin-right: 10px;
-  flex-grow: 1;
+  justify-content: space-between;
 `;
 
 export const StyledText = styled.p`
@@ -49,6 +50,12 @@ export const StyledText = styled.p`
   color: ${Colors.grayText};
   font-weight: 300;
   display: flex;
+
+  ${(props) =>
+    props.icon &&
+    css`
+      margin-top: 5px;
+    `}
 `;
 
 export const StyledAction = styled.div`

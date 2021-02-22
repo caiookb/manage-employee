@@ -1,52 +1,78 @@
-import React from "react";
-import { Icon } from "..";
+import React, { useState } from "react";
+import { Icon, Text } from "..";
+import { connect } from "react-redux";
 import {
   StyledAction,
   StyledCard,
-  StyledImage,
   StyledInfo,
   StyledOptions,
   StyledTag,
-  StyledText,
 } from "./Styles";
-
-const user = {
-  name: "Caio Henrique Moraes Silva",
-  email: "caiookb@gmail.com",
-  team: "Backend",
-  start_date: "12/2020",
-};
+import { AddOrEditEmployee, DeleteModal } from "../CustomModal/";
+import * as EmployeesController from "../../controller/EmployeesController";
+import moment from "moment";
 
 const Card = (props) => {
-  // const {
-  //   employee: { name, email, team, start_date },
-  // } = props;
+  const { item } = props;
+  const { deleteEmployee } = props;
+
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   return (
     <StyledCard>
-      <StyledTag team={user.team}>
-        <Icon size={"md"} icon={user.team.toLowerCase()} />
+      <StyledTag team={item.team}>
+        <Icon size={"md"} icon={item.team.toLowerCase()} />
       </StyledTag>
 
       <StyledInfo>
-        <StyledText size={"22"}>{user.name}</StyledText>
-        <StyledText size={"16"} styling={"italic"}>
-          {user.team} since {user.start_date}
-        </StyledText>
+        <Text fontSize={20} text={item.name} />
+        <Text
+          fontSize={16}
+          text={`${item.team} | Employee since ${moment(item.start_date).format(
+            "MMM/YYYY"
+          )}`}
+          styling={"italic"}
+        />
 
         <StyledAction>
-          <StyledText size={"14"}>
-            <Icon size={"sm"} icon={"email"} />
-            {user.email}
-          </StyledText>
+          <Icon size={"sm"} fontSize={17} icon={"email"} title={item.email} />
           <StyledOptions>
-            <Icon size={"sm"} icon={"edit"} />
-            <Icon size={"sm"} icon={"trash"} />
+            <Icon
+              size={"sm"}
+              icon={"edit"}
+              onClick={() => setEditModal(true)}
+            />
+            <Icon
+              size={"sm"}
+              icon={"trash"}
+              onClick={() => setDeleteModal(true)}
+            />
           </StyledOptions>
         </StyledAction>
       </StyledInfo>
+      <DeleteModal
+        active={deleteModal}
+        setActive={setDeleteModal}
+        item={item}
+        onClick={deleteEmployee}
+      />
+      <AddOrEditEmployee
+        active={editModal}
+        setActive={setEditModal}
+        editing={true}
+        item={item}
+        setDeleteModal={setDeleteModal}
+      />
     </StyledCard>
   );
 };
 
-export default Card;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteEmployee: (id) =>
+      dispatch(EmployeesController.deleteEmployeeById(id)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Card);

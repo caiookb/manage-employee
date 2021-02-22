@@ -6,15 +6,30 @@ import {
   StyledInputDiv,
   StyledPlaceholder,
   StyledTextInput,
+  StyledError,
 } from "./Styles";
 
 const TextInput = (props) => {
-  const { size, color, icon, placeholder, onChange, label, type } = props;
+  const {
+    size,
+    color,
+    icon,
+    placeholder,
+    onChange,
+    defaultValue,
+    name,
+    label,
+    register,
+    type,
+    value,
+    errors,
+  } = props;
 
   return (
     <StyledTextInput>
       {label ? <StyledPlaceholder>{label}</StyledPlaceholder> : null}
       <StyledInputDiv>
+        {icon ? <Icon icon={icon} size={"sm"} /> : null}
         <StyledInput
           onChange={(e) => onChange(e.target.value)}
           size={size}
@@ -22,9 +37,20 @@ const TextInput = (props) => {
           placeholder={placeholder}
           icon={icon}
           type={type}
+          name={name}
+          ref={register}
+          defaultValue={defaultValue}
         />
-        {icon ? <Icon icon={icon} size={"sm"} /> : null}
       </StyledInputDiv>
+      {errors ? (
+        <StyledError>
+          {errors?.[name] && (
+            <span>
+              <i>{label.replace("*", " ")} is required</i>
+            </span>
+          )}
+        </StyledError>
+      ) : null}
     </StyledTextInput>
   );
 };
@@ -33,4 +59,5 @@ export default TextInput;
 
 TextInput.defaultProps = {
   onChange: () => null,
+  defaultValue: null,
 };

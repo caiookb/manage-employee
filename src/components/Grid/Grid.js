@@ -2,37 +2,34 @@ import React from "react";
 import { StyledGrid } from "./Styles";
 
 const Grid = (props) => {
-  const { columns, display, children } = props;
+  const { columns, rows, customColumns, children } = props;
 
+  const rowLength = rows % 2 == 0 ? rows : rows + 1;
   const items = React.Children.toArray(children);
 
-  const convertedFlotToFraction = display.map((e) => {
-    e = `${e}fr`;
-    return e;
-  });
-
-  const rows = new Array(columns.length)
-    .fill({ items: [], size: 0, display: 0 })
-    .map((row, index) => {
-      row.size = columns[index];
-      return { ...row };
-    })
+  const gridRows = new Array(rowLength)
+    .fill({ items: [], size: columns })
     .map((row) => {
       const splicing = items.splice(0, row.size);
       return { ...row, items: splicing };
     });
 
-  const hasCustomDisplay = display.length > 0;
+  const convertedFlotToFraction = customColumns?.map((e) => {
+    e = `${e}fr`;
+    return e;
+  });
 
-  return rows.map((row) => (
-    <StyledGrid columns={hasCustomDisplay ? convertedFlotToFraction : row.size}>
-      {row.items}
-    </StyledGrid>
-  ));
+  return gridRows.map((row) => {
+    return (
+      <StyledGrid columns={customColumns ? convertedFlotToFraction : row.size}>
+        {row.items}
+      </StyledGrid>
+    );
+  });
 };
 
 export default Grid;
 
 Grid.defaultProps = {
-  display: [],
+  rows: [],
 };

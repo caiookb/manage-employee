@@ -19,6 +19,14 @@ export const StyledInputDiv = styled.div`
   margin: 10px;
 `;
 
+export const StyledError = styled.div`
+  height: 25px;
+  margin: 10px;
+  margin-top: 0;
+  color: ${Colors.red};
+  font-size: 14px;
+`;
+
 export const StyledInput = styled.input`
   border: none;
   height: 55px;
