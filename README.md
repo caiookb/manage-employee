@@ -1,5 +1,5 @@
 
-# Nutcache Frontend
+# Employee Manager Frontend
 
 React App created to manage employees on your company.
 
